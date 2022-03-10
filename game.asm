@@ -5,6 +5,7 @@
     SEG
     ORG $F000
 
+    include "pointers.asm"
     include "finePositioning.asm"
     include "index.asm"
     include "playfield.asm"
@@ -65,49 +66,62 @@ StartOfFrame:
     sta WSYNC
 
     ; SET PLAYERS POSITION
-    ldx $80
+    ldx PL0X
     inx
-    stx $80
+    stx PL0X
     cpx #150
     bne noreset0x
     ldx #0
-    stx $80
+    stx PL0X
 noreset0x
 
-    ldx $81
+    ldx PL0Y
     inx
-    stx $81
+    stx PL0Y
     cpx #228
     bne noreset0y
     ldx #0
-    stx $81
+    stx PL0Y
 noreset0y
 
     ldx #108
-    stx $82
+    stx PL1X
     ldx #100
-    stx $83
+    stx PL1Y
     
     sta WSYNC
 
+    ; SET MISSILE POSITIONS
+    lda #80
+    sta M0X
+    lda #150
+    sta M0Y
+    sta WSYNC
+
     ; LOAD AND SET PLAYER 0 POSITION
-    lda $80
+    lda PL0X
     ldx #0
     jsr PositionObject
     sta WSYNC
 
     ; LOAD AND SET PLAYER 1 POSITION
-    lda $82
+    lda PL1X
     ldx #1
     jsr PositionObject
     sta WSYNC
 
+    ; LOAD AND SET MISSILE 0 POSITION
+    lda M0X
+    ldx #2
+    jsr PositionObject
+    sta WSYNC
+    
     ; TRIGGER HMOVE REGISTER
     sta HMOVE
     sta WSYNC
 
     ; CONTINUE VBLANK
-    ldx #37
+    ldx #34
 
 VerticalBlank:
 
