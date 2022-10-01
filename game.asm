@@ -38,8 +38,8 @@ DivideLoop:         ; Waste time (not accounting for 23 MC of WSYNC)
 
 StartOfFrame:
 
-    lda #%00000000
-    sta VBLANK
+    ;lda #%00000000
+    ;sta VBLANK
     ; < END VBLANK
 
     ; > START VSYNC
@@ -121,7 +121,7 @@ noreset0y
     sta WSYNC
 
     ; CONTINUE VBLANK
-    ldx #34
+    ldx #36
 
 VerticalBlank:
 
@@ -132,15 +132,15 @@ VerticalBlank:
     lda #%00000000
     sta VBLANK
     ; < END VBLANK
-    
-    
+
+
     include "kernel.asm"
 
 
     ; > START OVERSCAN
     lda #%00000010
     sta VBLANK
-    ldx #36
+    ldx #33
 
 Overscan:
     

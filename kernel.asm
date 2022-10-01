@@ -15,7 +15,7 @@ Picture:
 
     ; PL0 yPOS      d: 15
     ; s: 24         f: 39
-    ; MUST finish at may: 41
+    ; MUST finish at max: 41
     sbc PL0Y         ; 3
     bcc draw0    ; 2 (3)
     SLEEP 7
@@ -34,11 +34,6 @@ enddraw0
     stx PF1         ; 4 43
     ldx PFD5,y      ; 4 47
     stx PF2         ; 4 51
-
-    cpy #150
-    ;php
-    ;ldx #$1E
-    ;txs
 
     dey
     ldx PFD0,y
@@ -77,10 +72,6 @@ enddraw1
     ldx PFD5,y      ; 4 47
     stx PF2         ; 4 51
     
-    ;php
-    ldx #$1D
-    txs
-
     dey             ; 2 53
     ldx PFD0,y
     tya
